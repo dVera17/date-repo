@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo Especial Para Ti ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">💜</text></svg>'), auto;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e8d5ff 0%, #f8e8ff 25%, #ffe8f5 50%, #fff0f8 75%, #f0e8ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Add floating aesthetic elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(220, 208, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(230, 230, 250, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Fireworks Container */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: firework 2s ease-out infinite;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(20) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Steps */
+        .step {
+            display: none;
+            text-align: center;
+            color: #6b46c1;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.1);
+            background: linear-gradient(45deg, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(139, 69, 19, 0.1);
+            color: #7c3aed;
+        }
+
+        /* New Aesthetic Buttons */
+        .btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #7c3aed;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">✨</text></svg>'), pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 8px 32px rgba(168, 85, 247, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow:
+                0 15px 40px rgba(168, 85, 247, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Special Question Buttons */
+        .question-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+            font-size: 1.6rem;
+            padding: 25px 50px;
+            margin: 20px;
+            animation: float 3s ease-in-out infinite;
+            border: 3px solid rgba(168, 85, 247, 0.3);
+            color: #6b21a8;
+            font-weight: 700;
+            backdrop-filter: blur(15px);
+            box-shadow:
+                0 12px 40px rgba(168, 85, 247, 0.25),
+                inset 0 2px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .question-btn:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .question-btn:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-10px) scale(1.02);
+            }
+        }
+
+        .question-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(248, 250, 252, 1));
+            border-color: rgba(168, 85, 247, 0.6);
+            color: #581c87;
+            transform: translateY(-8px) scale(1.08);
+            box-shadow:
+                0 20px 50px rgba(168, 85, 247, 0.35),
+                inset 0 2px 0 rgba(255, 255, 255, 1);
+        }
+
+        /* Hearts Animation */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatHeart 4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0) rotate(0deg);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1) rotate(10deg);
+            }
+
+            90% {
+                opacity: 1;
+                transform: translateY(-10vh) scale(1) rotate(-10deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-20vh) scale(0) rotate(0deg);
+            }
+        }
+
+        /* Final Invitation Card */
+        .invitation-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #6b21a8;
+            padding: 3.5rem;
+            border-radius: 30px;
+            box-shadow:
+                0 30px 60px rgba(168, 85, 247, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 1);
+            max-width: 550px;
+            margin: 2rem auto;
+            transform: scale(0);
+            transition: transform 0.5s ease-out;
+            border: 3px solid rgba(168, 85, 247, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .invitation-card.show {
+            transform: scale(1);
+            animation: cardReveal 1s ease-out;
+        }
+
+        @keyframes cardReveal {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .invitation-card h3 {
+            color: #7c3aed;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .invitation-card p {
+            color: #6b46c1;
+            font-size: 1.2rem;
+            text-shadow: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mejorar la tarjeta de invitación */
+        .invitation-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #6b21a8;
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow:
+                0 30px 60px rgba(168, 85, 247, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 1);
+            max-width: 600px;
+            margin: 2rem auto;
+            transform: scale(0);
+            transition: transform 0.5s ease-out;
+            border: 3px solid rgba(168, 85, 247, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        /* Contenedor de la imagen */
+        .image-container {
+            position: relative;
+            margin: 2rem 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(168, 85, 247, 0.3);
+            transform: scale(0);
+            animation: imageReveal 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes imageReveal {
+            0% {
+                transform: scale(0) rotate(-10deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* Imagen de la invitación */
+        .invitation-image {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .invitation-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Overlay con efectos */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg,
+                    rgba(168, 85, 247, 0.1) 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    rgba(236, 72, 153, 0.1) 100%);
+            pointer-events: none;
+            border-radius: 20px;
+        }
+
+        /* Sparkles animados */
+        .sparkles {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            animation: sparkleFloat 2s ease-in-out infinite;
+            color: #fbbf24;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        }
+
+        @keyframes sparkleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Mensaje de amor */
+        .love-message {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #7c3aed;
+            margin-top: 1.5rem;
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Título mejorado */
+        .invitation-card h3 {
+            color: #7c3aed;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        /* Responsive para la imagen */
+        @media (max-width: 768px) {
+            .invitation-card {
+                padding: 2rem;
+                margin: 1rem;
+                max-width: 90%;
+            }
+
+            .image-container {
+                margin: 1.5rem 0;
+            }
+
+            .sparkles {
+                font-size: 1.2rem;
+                top: 15px;
+                right: 15px;
+            }
+
+            .love-message {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                font-size: 1.1rem;
+                padding: 18px 35px;
+            }
+
+            .question-btn {
+                font-size: 1.3rem;
+                padding: 20px 40px;
+                margin: 15px;
+            }
+
+            .invitation-card {
+                padding: 2.5rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fireworks Container -->
+    <div class="fireworks-container" id="fireworks"></div>
+
+    <!-- Hearts Container -->
+    <div class="hearts" id="hearts"></div>
+
+    <div class="container">
+        <!-- Step 1: Welcome -->
+        <div class="step active" id="step1">
+            <h1>Hi babe</h1>
+            <p>Tengo algo muy especial para ti...</p>
+            <p>¿Estás lista para una pequeña sorpresa?</p>
+            <button class="btn" onclick="nextStep(2)">Si cachetitos</button>
+        </div>
+
+        <!-- Step 2: Building anticipation -->
+        <div class="step" id="step2">
+            <h2>Perfect cheekstricks</h2>
+            <p>Sabes que estos 2 años juntos han sido una bendición jajaja, es una alegría tenerte a mi lado y gracias a
+                Dios que nos permitió cumplir dos años de relación</p>
+            <p>Y quiero celebrar nuestro aniversario</p>
+            <button class="btn" onclick="nextStep(3)">Rapidoooo siguiente</button>
+        </div>
+
+        <!-- Step 3: More anticipation -->
+        <div class="step" id="step3">
+            <h2>Cada día contigo es una aventura</h2>
+            <p>Y quería preguntarte algo importante consentidita...</p>
+            <p>Algo que espero que te haga sonreír</p>
+            <button class="btn" onclick="nextStep(4)">Dime mi vida jiji</button>
+        </div>
+
+        <!-- Step 4: The big question -->
+        <div class="step" id="step4">
+            <h2>Mi vida...</h2>
+            <p>Para celebrar nuestro segundo aniversario</p>
+            <p>¿Quieres salir conmigo en una cita súper especial?</p>
+            <div style="margin-top: 2rem;">
+                <button class="btn question-btn" onclick="showInvitation()">Siiiiiiii</button>
+                <button class="btn question-btn" onclick="showInvitation()"
+                    style="background: linear-gradient(45deg, #a29bfe, #6c5ce7);">Absolutelyyy</button>
+            </div>
+        </div>
+
+        <!-- Step 5: Final invitation reveal -->
+        <div class="step" id="step5">
+            <h2>Ya sabia jeje</h2>
+            <p>Igual tampoco te dí la opción de no jiji</p>
+
+            <div class="invitation-card" id="invitationCard">
+                <h3>¡Feliz #2 Aniversario! 🎊</h3>
+                <div class="image-container">
+                    <img src="./date.png" alt="Invitación de Aniversario" class="invitation-image">
+                    <div class="image-overlay">
+                        <div class="sparkles">✨</div>
+                    </div>
+                </div>
+                <p class="love-message">Te amo Valentina</p>
+            </div>
+
+            <button class="btn" onclick="celebrateMore()" style="margin-top: 2rem;">¡Más fuegos artificiales!
+                🎆</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let fireworksInterval;
+        let heartsInterval;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function () {
+            startFireworks();
+            startHearts();
+        });
+
+        function nextStep(step) {
+            // Hide current step
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+
+            // Show loading for a moment
+            setTimeout(() => {
+                // Show next step
+                document.getElementById(`step${step}`).classList.add('active');
+                currentStep = step;
+
+                // Add more effects for special steps
+                if (step === 4) {
+                    intensifyFireworks();
+                }
+            }, 300);
+        }
+
+        function showInvitation() {
+            // Hide current step
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+
+            setTimeout(() => {
+                // Show final step
+                document.getElementById('step5').classList.add('active');
+                currentStep = 5;
+
+                // Show invitation card with delay
+                setTimeout(() => {
+                    document.getElementById('invitationCard').classList.add('show');
+                    celebrateMore();
+                }, 1000);
+            }, 500);
+        }
+
+        function startFireworks() {
+            const container = document.getElementById('fireworks');
+
+            fireworksInterval = setInterval(() => {
+                createFirework(container);
+            }, 800);
+        }
+
+        function createFirework(container) {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+
+            // Random position
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.top = Math.random() * 100 + '%';
+
+            // Aesthetic pastel colors
+            const colors = ['#e879f9', '#f0abfc', '#ddd6fe', '#c084fc', '#f3e8ff', '#fbbf24', '#fb7185'];
+            firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            container.appendChild(firework);
+
+            // Remove after animation
+            setTimeout(() => {
+                if (firework.parentNode) {
+                    firework.parentNode.removeChild(firework);
+                }
+            }, 2000);
+        }
+
+        function intensifyFireworks() {
+            // Clear existing interval
+            clearInterval(fireworksInterval);
+
+            // Create more frequent fireworks
+            fireworksInterval = setInterval(() => {
+                const container = document.getElementById('fireworks');
+                createFirework(container);
+                createFirework(container);
+            }, 400);
+        }
+
+        function startHearts() {
+            const container = document.getElementById('hearts');
+
+            heartsInterval = setInterval(() => {
+                createHeart(container);
+            }, 2000);
+        }
+
+        function createHeart(container) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+
+            // Aesthetic heart variations
+            const hearts = ['💜', '💖', '🤍', '💕', '✨', '🌸'];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+            // Random horizontal position
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+
+            container.appendChild(heart);
+
+            // Remove after animation
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 4000);
+        }
+
+        function celebrateMore() {
+            // Create burst of fireworks
+            const container = document.getElementById('fireworks');
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createFirework(container);
+                    createFirework(container);
+                }, i * 100);
+            }
+
+            // Create burst of hearts
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createHeart(heartsContainer);
+                }, i * 200);
+            }
+        }
+
+        // Clean up intervals when page is closed
+        window.addEventListener('beforeunload', function () {
+            clearInterval(fireworksInterval);
+            clearInterval(heartsInterval);
+        });
+    </script>
+</body>
+
+</html>
